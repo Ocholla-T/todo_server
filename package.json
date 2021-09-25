@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "node express mongodb backend for todo app",
   "main": "index.js",
+  "type": "module",
   "author": "Ocholla-T <tonnyocholla8@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^6.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
   }
 }
