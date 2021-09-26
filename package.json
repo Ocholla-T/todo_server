@@ -2,12 +2,16 @@
   "name": "todo",
   "version": "1.0.0",
   "description": "node express mongodb backend for todo app",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "author": "Ocholla-T <tonnyocholla8@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "serve": "nodemon server.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.7"
   },
