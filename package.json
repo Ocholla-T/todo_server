@@ -7,8 +7,11 @@
   "author": "Ocholla-T <tonnyocholla8@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "serve": "nodemon server.js",
-    "test": "jest"
+    "start": "nodemon server.js",
+    "test": "jest --coverage --runInBand --verbose ./tests"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -17,7 +20,11 @@
     "mongoose": "^6.0.7"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.15.8",
+    "@types/jest": "^27.0.2",
+    "babel-jest": "^27.2.5",
     "jest": "^27.2.2",
+    "mongodb-memory-server": "^7.4.3",
     "nodemon": "^2.0.13"
   }
 }
