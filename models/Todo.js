@@ -1,15 +1,24 @@
-import mongoose from 'mongoose';
-const { Schema } = mongoose;
+import mongoose from 'mongoose'
+const { Schema } = mongoose
 
-const todoSchema = new Schema({
-  content: {
-    type: String,
-    required: true,
+/**
+ * defines the todo Schema
+ * @class  Todo
+ * @property {String} content - Contains the todo content
+ * @property {Object} meta - Contains the isActive meta
+ *
+ */
+const todoSchema = new Schema(
+  {
+    content: {
+      type: String,
+      required: true,
+    },
+    meta: {
+      isActive: Boolean,
+    },
   },
-  meta: {
-    active: Boolean,
-    completed: Boolean,
-  },
-});
+  { strict: 'throw' },
+)
 
-export default mongoose.model('Todo', todoSchema);
+export default mongoose.model('Todo', todoSchema)
