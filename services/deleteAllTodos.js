@@ -1,7 +1,14 @@
-import Todo from '../models/Todo.js';
+import Todo from '../models/Todo.js'
 
-export const deleteAllTodos = async (req, res) => {
-  await Todo.deleteMany().catch((err) => console.error(err));
+/**
+ * deletes all todos
+ * @returns {Promise<number>} deletedCount - this is the number of todos deleted
+ */
 
-  res.end();
-};
+export async function deleteAllTodos() {
+  return await Todo.deleteMany({})
+    .then((response) => response.deletedCount)
+    .catch((error) => {
+      throw error
+    })
+}
