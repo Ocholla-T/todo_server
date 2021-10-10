@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "jest --coverage --runInBand --verbose ./tests"
+    "test": "jest --watch --coverage --runInBand --verbose ./tests"
   },
   "jest": {
     "testEnvironment": "node"
