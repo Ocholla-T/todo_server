@@ -1,11 +1,21 @@
 import express from 'express'
 // helper functions
 import { createTodo } from '../services/createTodo.js'
-import { findAllTodos } from '../services/findTodos.js'
+import { findAllTodos } from '../services/findAllTodos.js'
 import { deleteAllTodos } from '../services/deleteAllTodos.js'
 
 const router = express.Router()
 
+/**
+ * route to get all todos in the database
+ */
+router.get('/', async (req, res) => {
+  await findAllTodos().then((todos) => res.status(200).json(todos))
+})
+
+/**
+ * route to create a todo
+ */
 router.post('/', async (req, res) => {
   try {
     const { content, isActive } = req.body
@@ -19,6 +29,9 @@ router.post('/', async (req, res) => {
   }
 })
 
+/**
+ * route to delete all todos in the database
+ */
 router.delete('/', async (req, res) => {
   deleteAllTodos()
     .then((response) =>
