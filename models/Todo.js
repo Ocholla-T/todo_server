@@ -12,7 +12,7 @@ const todoSchema = new Schema(
   {
     content: {
       type: String,
-      required: true,
+      required: [true, 'The todo should have some content'],
     },
     meta: {
       isActive: Boolean,
