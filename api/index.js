@@ -1,6 +1,7 @@
 import express from 'express'
 // helper functions
 import { createTodo } from '../services/createTodo.js'
+import { updateTodo } from '../services/updateTodo.js'
 import { findAllTodos } from '../services/findAllTodos.js'
 import { deleteAllTodos } from '../services/deleteAllTodos.js'
 
@@ -20,8 +21,8 @@ router.post('/', async (req, res) => {
   try {
     const { content, isActive } = req.body
 
-    const { todoID } = await createTodo({ content, isActive })
-    res.json({ todoID })
+    const todoID = await createTodo({ content, isActive })
+    res.json(todoID)
   } catch (error) {
     res.status(400).json({
       message: error.message,
@@ -46,4 +47,24 @@ router.delete('/', async (req, res) => {
       })
     })
 })
+
+router.patch('/:id', async (req, res) => {
+  let { content } = req.body
+
+  await updateTodo({ _id: req.params.id, content: content, isActive: true })
+    .then((todo) => {
+      if (res.statusCode == 200 && todo == null) {
+        res.json({
+          message: 'Todo not found',
+        })
+      }
+      res.status(200).json(todo)
+    })
+    .catch((error) => {
+      res.status(400).json({
+        message: error.message,
+      })
+    })
+})
+
 export default router
