@@ -12,7 +12,7 @@ describe('Creating a todo: ', () => {
    * test if todo is created
    */
   test('should create a new todo', async () => {
-    const { todoID } = await createTodo({ content: 'test todo', isActive: false })
+    const todoID = await createTodo({ content: 'test todo', isActive: false })
     const todo = await Todo.findById(todoID)
 
     expect(todo.content).toBe('test todo')
