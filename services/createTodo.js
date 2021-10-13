@@ -19,7 +19,7 @@ export async function createTodo({ content, isActive }) {
 
     await newTodo.save()
 
-    return { todoID: newTodo._id }
+    return newTodo._id
   } catch (error) {
     throw error
   }
