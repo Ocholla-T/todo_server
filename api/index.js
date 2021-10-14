@@ -3,6 +3,7 @@ import express from 'express'
 import { createTodo } from '../services/createTodo.js'
 import { updateTodo } from '../services/updateTodo.js'
 import { findAllTodos } from '../services/findAllTodos.js'
+import { deleteOneTodo } from '../services/deleteOneTodo.js'
 import { deleteAllTodos } from '../services/deleteAllTodos.js'
 
 const router = express.Router()
@@ -48,13 +49,40 @@ router.delete('/', async (req, res) => {
     })
 })
 
+/**
+ * route to delete a single todo
+ */
+
+router.delete('/:id', async (req, res) => {
+  try {
+    await deleteOneTodo({ _id: req.params.id }).then((deletedCount) => {
+      if (res.statusCode == 200 && deletedCount == 0) {
+        res.status(404).json({
+          message: 'Document not found',
+        })
+      }
+      res.status(200).json({
+        deleteCount: deletedCount,
+      })
+    })
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    })
+  }
+})
+
+/**
+ * route to update the content of a single todo
+ */
+
 router.patch('/:id', async (req, res) => {
   let { content } = req.body
 
   await updateTodo({ _id: req.params.id, content: content, isActive: true })
     .then((todo) => {
       if (res.statusCode == 200 && todo == null) {
-        res.json({
+        res.status(404).json({
           message: 'Todo not found',
         })
       }
