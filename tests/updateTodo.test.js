@@ -3,9 +3,9 @@ import db from './database.js'
 import { createTodo } from '../services/createTodo.js'
 import { updateTodo } from '../services/updateTodo.js'
 
-beforeAll(() => db.connect())
-afterEach(() => db.clearDatabase())
-afterAll(() => db.closeDatabase())
+beforeAll(async () => await db.connect())
+afterEach(async () => await db.clearDatabase())
+afterAll(async () => await db.closeDatabase())
 
 describe('Does the document update if todo with _id is found', () => {
   test('updates the document', async () => {

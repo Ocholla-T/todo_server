@@ -3,9 +3,9 @@ import db from './database.js'
 import { createTodo } from '../services/createTodo.js'
 import { deleteAllTodos } from '../services/deleteAllTodos.js'
 
-beforeAll(() => db.connect())
-afterEach(() => db.clearDatabase())
-afterAll(() => db.closeDatabase())
+beforeAll(async () => await db.connect())
+afterEach(async () => await db.clearDatabase())
+afterAll(async () => await db.closeDatabase())
 
 describe('Deleting all todos in the database', () => {
   test('should delete all todos', async () => {

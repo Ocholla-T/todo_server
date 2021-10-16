@@ -4,9 +4,9 @@ import Todo from '../models/Todo.js'
 import { deleteOneTodo } from '../services/deleteOneTodo.js'
 import { createTodo } from '../services/createTodo.js'
 
-beforeAll(() => db.connect())
-afterEach(() => db.clearDatabase())
-afterAll(() => db.closeDatabase())
+beforeAll(async () => await db.connect())
+afterEach(async () => await db.clearDatabase())
+afterAll(async () => await db.closeDatabase())
 
 test('should delete one todo', async () => {
   let todoOneID = (await createTodo({ content: 'test todo 1', isActive: true })).toString()

@@ -3,9 +3,9 @@ import db from './database.js'
 import { createTodo } from '../services/createTodo.js'
 import { findAllTodos } from '../services/findAllTodos.js'
 
-beforeAll(() => db.connect())
-afterEach(() => db.clearDatabase())
-afterAll(() => db.closeDatabase())
+beforeAll(async () => await db.connect())
+afterEach(async () => await db.clearDatabase())
+afterAll(async () => await db.closeDatabase())
 
 describe('Should find all todos in database', () => {
   test('finds all todos in database and returns them', async () => {
