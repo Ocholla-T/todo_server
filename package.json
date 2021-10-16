@@ -7,7 +7,7 @@
   "author": "Ocholla-T <tonnyocholla8@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --trace-warnings server.js",
+    "start": "nodemon --trace-warnings start.js",
     "test": "jest --watch --coverage --runInBand --verbose ./tests"
   },
   "jest": {
