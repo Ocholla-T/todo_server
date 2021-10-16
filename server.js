@@ -7,7 +7,9 @@ dotenv.config({ path: './config/.env' })
 const app = express()
 
 // connection to database
-mongoose.connect(process.env.DB_CONNECTION_URL, () => console.log('connected to database'))
+if (process.env.NODE_ENV !== 'test') {
+  mongoose.connect(process.env.DB_CONNECTION_URL, () => console.log('connected to database'))
+}
 
 // global middleware
 app.use(
@@ -20,8 +22,4 @@ app.use(express.json())
 // routing for the app
 app.use('/api/todo', routes)
 
-const port = process.env.PORT || 3000
-
-app.listen(port, () => {
-  console.log(`app has started on port ${port}`)
-})
+export default app
