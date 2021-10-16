@@ -23,12 +23,35 @@ router.post('/', async (req, res) => {
     const { content, isActive } = req.body
 
     const todoID = await createTodo({ content, isActive })
-    res.json(todoID)
+    res.status(201).json(todoID)
   } catch (error) {
     res.status(400).json({
       message: error.message,
     })
   }
+})
+
+/**
+ * route to update the content of a single todo
+ */
+
+router.patch('/:id', async (req, res) => {
+  let { content } = req.body
+
+  await updateTodo({ _id: req.params.id, content: content, isActive: true })
+    .then((todo) => {
+      if (res.statusCode == 200 && todo == null) {
+        res.status(404).json({
+          message: 'Todo not found',
+        })
+      }
+      res.status(200).json(todo)
+    })
+    .catch((error) => {
+      res.status(400).json({
+        message: error.message,
+      })
+    })
 })
 
 /**
@@ -70,29 +93,6 @@ router.delete('/:id', async (req, res) => {
       message: error.message,
     })
   }
-})
-
-/**
- * route to update the content of a single todo
- */
-
-router.patch('/:id', async (req, res) => {
-  let { content } = req.body
-
-  await updateTodo({ _id: req.params.id, content: content, isActive: true })
-    .then((todo) => {
-      if (res.statusCode == 200 && todo == null) {
-        res.status(404).json({
-          message: 'Todo not found',
-        })
-      }
-      res.status(200).json(todo)
-    })
-    .catch((error) => {
-      res.status(400).json({
-        message: error.message,
-      })
-    })
 })
 
 export default router
